@@ -20,11 +20,11 @@ I added two small, focused examples to illustrate the move from a BehaviourSubje
 
 ## Practical guidance
 
-🟩 Keep Observables for anything that inherently stream-like: HTTP polling, websockets, router events, drag / scroll streams
+🟩 Keep Observables for anything that inherently stream-like: HTTP polling, websockets, router events, drag / scroll streams <br>
 
-🟩 Use signals for `latest value` state living inside a component or a shallow service.
+🟩 Use signals for `latest value` state living inside a component or a shallow service<br>
 
-🟩 Hybrid trick: wrap an Observable in toSignal() (Angular 17+) when a template needs it, but keep the Observable for RxJS operators
+🟩 Hybrid trick: wrap an Observable in toSignal() (Angular 17+) when a template needs it, but keep the Observable for RxJS operators<br>
 
 🟩 Service API conventions
 - Private writable signal private user = signal<User | null>(null)
