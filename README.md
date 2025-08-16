@@ -20,9 +20,11 @@ I added two small, focused examples to illustrate the move from a BehaviourSubje
 
 ## Practical guidance
 
-🟩 Keep Observables for anything that’s inherently stream-like: HTTP polling, websockets, router events, drag / scroll streams.
+🟩 Keep Observables for anything that inherently stream-like: HTTP polling, websockets, router events, drag / scroll streams
+
 🟩 Use signals for `latest value` state living inside a component or a shallow service.
-🟩 Hybrid trick: wrap an Observable in toSignal() (Angular 17+) when a template needs it, but keep the Observable for RxJS operators.
+
+🟩 Hybrid trick: wrap an Observable in toSignal() (Angular 17+) when a template needs it, but keep the Observable for RxJS operators
 
 🟩 Service API conventions
 - Private writable signal private user = signal<User | null>(null)
@@ -39,14 +41,17 @@ After: signal<User | null>(null).
 - They update by calling a setter on the service (setUser, clearUser)
 
 🟩 Tooling safety-nets:
-- ESLint rule suggestion: flag new BehaviorSubject() unless file path matches /providers|http/.
-- Husky pre-commit hook: grep -R "new BehaviorSubject" src/ | exit 1 to stop accidental additions.
+- ESLint rule suggestion: flag new BehaviorSubject() unless file path matches /providers|http, like:
+`Zero-code solution` = @typescript-eslint/no-restricted-syntax
+![Zero-code solution](https://eslint.org/docs/latest/rules/no-restricted-syntax)
+
+- Husky pre-commit hook: `grep -R "new BehaviorSubject" src/ | exit 1` just to stop accidental additions
 
 🟩 Performance / memory notes
-- Signals are synchronous; avoid giant computations in computed() – offload heavy work to WebWorkers or RxJS if needed.
+- Signals are synchronous; avoid giant computations in computed() offload heavy work to WebWorkers or RxJS if needed
 - Still mark components changeDetection: 'OnPush' – signals don’t change that advice
 
-🟩 Run unit tests – you may need tick() instead of flushing observables.
+🟩 Run unit tests – you may need tick() instead of flushing observables
 
 
 
